@@ -7,10 +7,7 @@
  * @release beta
  * @author Jason Coward <jason@modx.com>
  */
-$mtime = microtime();
-$mtime = explode(" ", $mtime);
-$mtime = $mtime[1] + $mtime[0];
-$tstart = $mtime;
+$tstart = microtime(true);
 set_time_limit(0);
 
 /* define sources */
@@ -33,7 +30,7 @@ $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 /* set package info */
 define('PKG_NAME','getvalues');
 define('PKG_VERSION','1.0.0');
-define('PKG_RELEASE','beta');
+define('PKG_RELEASE','pl');
 
 /* load builder */
 $modx->loadClass('transport.modPackageBuilder','',false, true);
@@ -71,15 +68,13 @@ $builder->putVehicle($vehicle);
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
     'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
 ));
 
 /* zip up the package */
 $builder->pack();
 
-$mtime= microtime();
-$mtime= explode(" ", $mtime);
-$mtime= $mtime[1] + $mtime[0];
-$tend= $mtime;
+$tend= microtime(true);
 $totalTime= ($tend - $tstart);
 $totalTime= sprintf("%2.4f s", $totalTime);
 

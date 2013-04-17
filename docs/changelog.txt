@@ -1,5 +1,7 @@
 Changelog for getValues.
 
+getValues 1.0.0-pl (April 17, 2013)
+====================================
 - Use getIterator instead of getCollection
 
 getValues 1.0.0-beta (October 12, 2010)
