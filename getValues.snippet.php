@@ -29,10 +29,11 @@ if ($criteria = $modx->newQuery($class, $modx->fromJSON($where))) {
         $criteria->prepare();
         $modx->log(modX::LOG_LEVEL_ERROR, "SQL: {$criteria->toSql()}", '', __FUNCTION__, __FILE__, __LINE__);
     }
-    $collection = $modx->getCollection($class, $criteria);
+    $collection = $modx->getIterator($class, $criteria);
     if (!empty($collection)) {
         $values = array();
         foreach ($collection as $object) {
+            /** @var xPDOObject $object */
             $values[] = $object->get($field);
         }
         if (!empty($distinct)) {
